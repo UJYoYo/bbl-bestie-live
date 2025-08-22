@@ -49,4 +49,6 @@ def receive_webhook():
 
 if __name__ == "__main__":
     init_db()
-    app.run(port=9888, debug=True)
+    # app.run(port=9888, debug=True)
+    port = int(os.environ.get("PORT", 5678))  # Railway sets PORT
+    app.run(host="0.0.0.0", port=port, debug=False)
