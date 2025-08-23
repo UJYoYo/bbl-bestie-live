@@ -31,7 +31,7 @@ app = Flask(__name__)
 # LINE credentials (add these)
 LINE_CHANNEL_ACCESS_TOKEN = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
 if LINE_CHANNEL_ACCESS_TOKEN:
-    return "channel access token found"
+    print("channel access token found")
 
 LINE_CHANNEL_SECRET = os.environ.get('LINE_CHANNEL_SECRET')
 if LINE_CHANNEL_SECRET:
