@@ -101,21 +101,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
-    if not configuration:
-        print("❌ LINE configuration not available")
-        return
-        
-    try:
-        with ApiClient(configuration) as api_client:
-            line_bot_api = MessagingApi(api_client)
-            line_bot_api.reply_message_with_http_info(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[TextMessage(text=f"You said: {event.message.text}")]
-                )
+    print(configuration)
+    with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
+        line_bot_api.reply_message_with_http_info(
+            ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[TextMessage(text=event.message.text)]
             )
-    except Exception as e:
-        print(f"❌ Error sending LINE message: {e}")
+        )
 
 if __name__ == "__main__":
     init_db()
