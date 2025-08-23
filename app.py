@@ -25,6 +25,63 @@ from linebot.v3.webhooks import (
     MessageEvent,
     TextMessageContent
 )
+# Add this RIGHT AFTER your imports in app.py
+
+print("=" * 50)
+print("🔍 DEBUGGING ENVIRONMENT VARIABLES")
+print("=" * 50)
+
+# Check all environment variables
+print("All LINE-related env vars:")
+for key, value in os.environ.items():
+    if 'LINE' in key:
+        print(f"  {key} = {value[:20]}..." if value else f"  {key} = None")
+
+print()
+
+# Check specific variables
+LINE_CHANNEL_ACCESS_TOKEN = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
+LINE_CHANNEL_SECRET = os.environ.get('LINE_CHANNEL_SECRET')
+
+print(f"LINE_CHANNEL_ACCESS_TOKEN:")
+print(f"  Exists: {LINE_CHANNEL_ACCESS_TOKEN is not None}")
+print(f"  Type: {type(LINE_CHANNEL_ACCESS_TOKEN)}")
+print(f"  Length: {len(LINE_CHANNEL_ACCESS_TOKEN) if LINE_CHANNEL_ACCESS_TOKEN else 0}")
+print(f"  Value: '{LINE_CHANNEL_ACCESS_TOKEN}'")
+print(f"  First 20 chars: {LINE_CHANNEL_ACCESS_TOKEN[:20] if LINE_CHANNEL_ACCESS_TOKEN else 'None'}")
+
+print(f"LINE_CHANNEL_SECRET:")
+print(f"  Exists: {LINE_CHANNEL_SECRET is not None}")
+print(f"  Type: {type(LINE_CHANNEL_SECRET)}")
+print(f"  Length: {len(LINE_CHANNEL_SECRET) if LINE_CHANNEL_SECRET else 0}")
+print(f"  Value: '{LINE_CHANNEL_SECRET}'")
+
+print()
+
+# Test configuration creation
+print("Testing Configuration creation...")
+try:
+    if LINE_CHANNEL_ACCESS_TOKEN and LINE_CHANNEL_SECRET:
+        from linebot.v3.messaging import Configuration
+        from linebot.v3 import WebhookHandler
+        
+        print(f"Creating configuration with token: {LINE_CHANNEL_ACCESS_TOKEN[:10]}...")
+        configuration = Configuration(LINE_CHANNEL_ACCESS_TOKEN)
+        
+        print(f"Configuration object: {configuration}")
+        print(f"Configuration.access_token: {configuration.access_token}")
+        print(f"Configuration.access_token type: {type(configuration.access_token)}")
+        
+        handler = WebhookHandler(LINE_CHANNEL_SECRET)
+        print(f"Handler created successfully: {handler}")
+        
+    else:
+        print("❌ Cannot create configuration - missing tokens")
+        
+except Exception as e:
+    print(f"❌ Error creating configuration: {e}")
+    
+print("=" * 50)
 
 app = Flask(__name__)
 
