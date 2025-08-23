@@ -35,7 +35,7 @@ if LINE_CHANNEL_ACCESS_TOKEN:
 
 LINE_CHANNEL_SECRET = os.environ.get('LINE_CHANNEL_SECRET')
 if LINE_CHANNEL_SECRET:
-    print "secret found"
+    print ("secret found")
 
 configuration = Configuration(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
