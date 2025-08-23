@@ -30,12 +30,12 @@ app = Flask(__name__)
 
 # LINE credentials (add these)
 LINE_CHANNEL_ACCESS_TOKEN = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
-if LINE_CHANNEL_ACCESS_TOKEN:
-    print("channel access token found")
+if not LINE_CHANNEL_ACCESS_TOKEN:
+    print("channel access token not found")
 
 LINE_CHANNEL_SECRET = os.environ.get('LINE_CHANNEL_SECRET')
-if LINE_CHANNEL_SECRET:
-    print ("secret found")
+if not LINE_CHANNEL_SECRET:
+    print ("secret not found")
 
 configuration = Configuration(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
